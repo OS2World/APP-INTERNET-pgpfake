@@ -1,0 +1,118 @@
+PGPFAKE, Version 0.05             PGP 5.0 Shell for OS/2
+
+This shell allows programs that are designed to use PGP 2.6.3 to use PGP 5.0 instead.
+It was originally written as an interface between PMMail 1.96 and its old 
+support for PGP 2.6.3. However, the new support with v0.04 allows most 2.6.3
+calls to work with PGP 5.0. It is designed to work with the OS/2 port of PGP 5.0,
+available from http://www.openpgp.net or http://www.pgpi.com
+
+
+What's new?
+-----------
+
+0.05:
+FIX: When mistyping the Passphrase upon signing the message text was skipped
+     and the message was sent and stored empty. Now pgpfake has the interface
+     to inform the caller (especially PMMail) of the error. Just as with 2.6.3 
+     PMMail then displays a warning popup (Wrong Passphrase) and lets the user
+     reenter the passphrase.
+NEW: Two executables (emx 0.9d fix 3). pgpfake.exe compiled with "gcc -O2", 
+     compressed\pgpfake.exe compiled with "gcc -s -Zcrtdll -mpentium -O"
+     and lxlite compressed. 
+NEW: Nick Burch made the proposal to put pgpfake under the GNU public license.
+     I failed to contact Thomas Vandahl, but as he originally released the
+     source code I assume (and hope) it is alright with him.
+
+	version 0.05 by Dieter WERNER
+
+0.04:
+NEW: Allows PGPFAKE.EXE to be called as if it were PGP.EXE, and passes
+     the request on to PGP5.EXE (seamless use of PGPFAKE.EXE in other words)
+NEW: Support for most of the 2.6.x command line structure, including passing
+     to PGPK.EXE and PGP5.EXE
+NEW: Support to always encript to the senders ID.
+
+        project handed over to Nick Burch <Nick@Horton-Vineyard.com>
+
+0.03:
+NEW: Thanks to Walter Schmidt <wschmi@ibm.net> for giving me a hint how to
+     realize batchmode with PGP 5.0.
+NEW: Thanks to Dieter Werner <e8726172@student.tuwien.ac.at> for adding
+     support for "sign & encrypt".
+NEW: Support for adding public keys to keyring
+FIX: Signing a document did not always include the message text
+FIX: Doubly spaced text files no longer occur
+
+0.02:
+FIX: Non-initialized variable.
+
+
+Features
+--------
+
+This was originally only written as a quick shell to allow PGP 5 support
+with PMMail, as a stop-gap until PMMail 2.0 came along with PGP 5 support.
+With that in mind, only the following features seem to work:
+
+- sign a message
+- verify a signature
+- encrypt a message to 1 recipient
+- sign and encrypt a message to 1, 2 or 3 recipients
+- decrypt a message
+- include public key in message
+- add public key to keyring
+- seamless PGP 5 useage
+- PGP 2.6.x commandline usage
+
+The following features are not implemented
+
+- add 2.6.x public key fingerprint
+  PGP 5.0 needs a passphrase to generate a public key fingerprint, and since
+  2.6.x didn't, the passphrase isn't supplied, so there's not a lot we can do!
+
+
+How do I use this thing?
+------------------------
+
+Copy pgpfake.exe to the directory pointed to by PGPPATH. Rename your pgp.exe 
+to pgp5.exe and pgpfake.exe to pgp.exe. That's all. Note that this "shell" is
+only designed to handle calls by PMMail. It may not work with other programs.
+If you would like to know what the program did, set PGPFAKE_DEBUG=1 in your
+config.sys and reboot. pgpfake will then write a logfile to %TMP%\pgpfake.log.
+The result of the signature tests will be in %TMP%\signok.txt.
+
+The program needs the emx-runtime libraries to run. If you have installed
+PGP 5.0, these should already be on your system. If not, you can get them
+from most BBS's and OS/2 ftp sites (you know the list)
+
+If you care to comment about this program, your opinions are very much
+appreciated. The program and its source are Freeware. Don't blame me if
+something doesn't work. Fix it and send the source back to me. Thats how
+things get implimented!
+
+
+Known Bugs:
+-----------
+* When encripting, the last line of the message isn't encripted and so isn't sent
+* The 2.6.x Decript assumes that if the first argument passed to the program ends
+  in .pgp or .asc, then it's supposed to decode it
+* Some long command line arguments may be mistaken for being a PMMail call, and be
+  handled totally incorrectly. In this case, you'll just have to call PGP5.EXE 
+  yourself
+* You can only send encripted mail to 1 person, and signed and encripted to 1 to 3
+  If you want to sign and encript to more, open the source code, and see what I've
+  done for case 17 and 18. Modify this for case 18 (3 people) and so on. I can't 
+  see the need so I havn't coded for more recipients.
+
+
+Who's hehind all this?
+----------------------
+
+Versions up to 0.03
+Thomas Vandahl <thomas.vandahl@contec-dt.de>
+
+Version 0.04 (and probably future ones)
+Nick Burch <nick@horton-vineyard.com>
+
+Version 0.05
+Dieter WERNER <d_werner@gmx.net> (<e8726172@student.tuwien.ac.at>)
