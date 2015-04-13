@@ -1,0 +1,13 @@
+Original Idea And Original Code
+        Thomas Vandahl <thomas.vandahl@contec-dt.de>
+
+Addition Help, with Batchmode etc
+        Dieter Werner <e8726172@student.tuwien.ac.at>
+        Walter Schmidt <wschmi@ibm.net>
+        
+New Code for seamless(ish) usage
+        Nick Burch <nick@horton-vineyard.com>
+
+Error handling for invalid Passphrase during Sign:
+	Dieter Werner <d_werner@gmx.net> (<e8726172@student.tuwien.ac.at>)
+
